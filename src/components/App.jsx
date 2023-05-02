@@ -63,7 +63,7 @@ export class App extends Component {
     const { images, showModal, imageURL, error, isLoading } = this.state;
     return (
       <div className={s.app}>
-        <Searchbar setQuery={this.setQuery} />
+        <Searchbar setNewQuery={this.setQuery} />
         {error && <p>Whoops, something went wrong: {error.message}</p>}
         {isLoading && <Loader />}
         {images.length > 0 && (

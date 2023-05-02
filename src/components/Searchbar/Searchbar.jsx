@@ -1,48 +1,42 @@
 import s from './Searchbar.module.css';
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import { useState } from 'react';
 
-export default class Searchbar extends Component {
-  state = {
-    query: '',
+export default function Searchbar({ setNewQuery }) {
+  const [query, setQuery] = useState('');
+  const onInputChange = e => {
+    setQuery(e.target.value);
   };
-
-  setQuery = e => {
-    this.setState({
-      query: e.currentTarget.value,
-    });
-  };
-  onFormSubmit = e => {
+  const onFormSubmit = e => {
     e.preventDefault();
-    if (this.state.query.trim() === '') {
+    if (query.trim() === '') {
       return;
     }
-    this.props.setQuery(this.state.query.trim().toLowerCase());
-    this.setState({ query: '' });
+    setNewQuery(query.trim().toLowerCase());
+    setQuery('');
   };
-  render() {
-    return (
-      <header className={s.searchbar}>
-        <form onSubmit={this.onFormSubmit} className={s.searchForm}>
-          <button type="submit" className={s.searchFormButton}>
-            <span className={s.searchFormButtonLabel}>Search</span>
-          </button>
+  return (
+    <header className={s.searchbar}>
+      <form onSubmit={onFormSubmit} className={s.searchForm}>
+        <button type="submit" className={s.searchFormButton}>
+          <span className={s.searchFormButtonLabel}>Search</span>
+        </button>
 
-          <input
-            className={s.searchFormInput}
-            name="query"
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            value={this.state.query}
-            onChange={this.setQuery}
-          />
-        </form>
-      </header>
-    );
-  }
+        <input
+          className={s.searchFormInput}
+          name="query"
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+          value={query}
+          onChange={onInputChange}
+        />
+      </form>
+    </header>
+  );
 }
+
 Searchbar.propTypes = {
   setQuery: PropTypes.func,
 };
