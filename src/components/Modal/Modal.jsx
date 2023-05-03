@@ -8,6 +8,7 @@ const modalRoot = document.querySelector('#modal-root');
 export default function Modal({ closeModal, imageURL }) {
   const handleKeydown = e => {
     if (e.code === 'Escape') closeModal();
+    console.log(e.code);
   };
   const handleBackdropClick = e => {
     if (e.target === e.currentTarget) closeModal();
@@ -15,8 +16,8 @@ export default function Modal({ closeModal, imageURL }) {
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeydown);
-    return window.removeEventListener('keydown', handleKeydown);
-  });
+    return () => window.removeEventListener('keydown', handleKeydown);
+  }, []);
 
   return createPortal(
     <div onClick={handleBackdropClick} className={s.overlay}>
