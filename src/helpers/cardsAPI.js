@@ -18,26 +18,3 @@ export default async function getImages(query, page) {
   const res = await axios.get(`${BASE_URL}?${params}`);
   return res.data;
 }
-
-// export class ImagesAPI {
-//   constructor() {
-//     this.query = null;
-//     this.page = 1;
-//   }
-//   settingUrl() {
-//     return {
-//       key: API_KEY,
-//       q: this.query,
-//       page: this.page,
-//       per_page: 12,
-//       image_type: 'photo',
-//       orientation: 'horizontal',
-//       safesearch: true,
-//     };
-//   }
-//   async getImages(query) {
-//     const params = new URLSearchParams(this.settingUrl());
-//     const res = await axios.get(`${BASE_URL}?${params}`);
-//     return res.data;
-//   }
-// }
