@@ -17,7 +17,7 @@ export default function Modal({ closeModal, imageURL }) {
   useEffect(() => {
     window.addEventListener('keydown', handleKeydown);
     return () => window.removeEventListener('keydown', handleKeydown);
-  }, []);
+  });
 
   return createPortal(
     <div onClick={handleBackdropClick} className={s.overlay}>
